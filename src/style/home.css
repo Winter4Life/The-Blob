@@ -4,7 +4,33 @@
     margin: auto;
     background: white;
     padding-bottom: 30px;
-}
+    animation: reveal 2s ease-in-out 2s forwards;
+  }
+
+  
+  .intro {
+    display: flex;
+    flex-direction: row; 
+    align-items: center; 
+    justify-content: center; 
+    margin: auto;
+    background: white;
+    padding-bottom: 30px;
+  }
+  
+  .intro h1 {
+    font-family: 'Jockey One', sans-serif;
+    font-weight: 900;
+    font-size: 40px;
+    margin-right: 100px; 
+    padding-right: 100px;
+  }
+  
+  .intro img {
+    max-width: 100%; 
+    height: auto; 
+  }
+  
 
 .post {
     display: flex;

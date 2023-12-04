@@ -9,6 +9,7 @@ body {
 .container {
   margin: 10px;
   text-align: center;
+  background: linear-gradient(to bottom, white, white);
 }
 
 .nav {
@@ -20,11 +21,28 @@ body {
   gap: 30px;
   padding: 0 30px;
   font-size: 25px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
+
 
 .title {
   font-size: 35px;
-  margin: 3px;
+  margin: 10px 20px;
+  display: flex;
+  align-items: center;
+  font-family: 'Jockey One', sans-serif;
+  font-weight: 700;
+}
+
+.white-text {
+  color: white;
+  margin-right: 8px;
+}
+
+.red-text {
+  color: #FF6B6C;
 }
 
 .img-post {
@@ -39,16 +57,28 @@ body {
 
 .searchBox {
   width: 300px;
-  margin-top: 13px;
+  margin-top: 5.5px;
+  border-radius: 15px;
+  height: 30px;
+  border: transparent;
 }
+
 
 .img-profile {
   width: 30px;
   height: auto;
 }
 
+.nav li {
+  transition: box-shadow 0.3s ease, border-radius 0.3s ease; /* Add both properties to the transition */
+}
+
+.nav .searchBox {
+  box-shadow: none; /* Exclude box shadow for the search bar */
+}
+
 .nav ul {
-  padding: 0;
+  padding: 12px 23px;
   margin: 0;
   list-style: none;
   display: flex;
@@ -64,14 +94,23 @@ body {
   padding: 0 2px;
 }
 
-.nav li:hover {
-  background-color: #86aee5; 
+.nav li:not(.searchBox):hover {
+  box-shadow: inset 0px 60px 0px 0px #86aee5;
+  border-radius: 8px;
+}
+
+
+.login-nav {
+  font-family: 'Jockey One', sans-serif;
+  font-weight: 700;
 }
 
 .logoutButton {
-  margin-top: 10px;
+  margin-top: 8px;
   color: white;
   border: none;
   background-color: transparent;
   font-size: 20px;
+  font-family: 'Jockey One', sans-serif;
+  font-weight: 700;
 }
