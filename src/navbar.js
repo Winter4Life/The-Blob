@@ -49,6 +49,11 @@ function Navbar() {
           </>
         )}
         </li>
+        <li>
+          <Link to="/profile">
+          <img src={profileIMG} alt="Profile" className="img-profile"/>
+          </Link>
+        </li>
       </ul>
     </nav>
   );
