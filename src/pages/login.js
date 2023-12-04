@@ -32,6 +32,7 @@ function Login({ setIsAuth }) {
       })
       .catch((error) => {
         console.error("Sign in error:", error);
+        alert("Incorrect username or password. Please try again.");
       });
   };
 
