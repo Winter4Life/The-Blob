@@ -73,7 +73,6 @@ function Login({ setIsAuth }) {
         Sign in with Google
       </button>
       </div>
-      <Authentication/>
     </form>
     </div>
     

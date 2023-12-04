@@ -93,7 +93,6 @@ const SignUp = () => {
           Login
         </Link>
       </div>
-      <Authentication />
     </form>
   );
 };

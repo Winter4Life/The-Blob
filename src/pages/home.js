@@ -60,7 +60,6 @@ function Home({ isAuth }) {
         <h1 >Welcome to the BLOB!</h1>
         <img src={blobImage} alt="Blob" />
       </div>
-      <button onClick={handleDeleteAllPosts}>Delete All Posts</button>
       {postLists.map((post) => (
         <Link key={post.id} to={`/post/${post.id}`} className="post">
           <div className="postHeader">
@@ -90,3 +89,6 @@ function Home({ isAuth }) {
 }
 
 export default Home;
+
+/*       <button onClick={handleDeleteAllPosts}>Delete All Posts</button>
+*/
