@@ -46,6 +46,7 @@ function CreatePost({ isAuth }) {
           postText,
           img: imgUrl,
           author: { name: authorName, id: authorId },
+          comments: [], // Initialize comments as an empty array
         });
       } else {
         // If no image file, simply add the post without the img field
@@ -53,6 +54,7 @@ function CreatePost({ isAuth }) {
           title,
           postText,
           author: { name: authorName, id: authorId },
+          comments: [], // Initialize comments as an empty array
         });
       }
   

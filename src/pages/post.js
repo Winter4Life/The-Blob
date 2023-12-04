@@ -1,14 +1,12 @@
-// Post.js
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { doc, getDoc, updateDoc, arrayUnion } from "firebase/firestore";
 import { db } from "../firebase";
 
 function Post() {
   const { postId } = useParams();
-  const [post, setPost] = useState({ comments: [] }); // Updated initialization
+  const [post, setPost] = useState(null);
   const [newComment, setNewComment] = useState("");
-  const [likes, setLikes] = useState(0);
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -18,8 +16,6 @@ function Post() {
         console.log("Fetched post:", postDoc.data());
         if (postDoc.exists()) {
           setPost({ ...postDoc.data(), id: postDoc.id });
-          // Set initial likes count
-          setLikes(postDoc.data().likes || 0);
         } else {
           console.error("Post not found");
         }
@@ -48,6 +44,7 @@ function Post() {
       // Update local state with the new comment
       setPost((prevPost) => ({
         ...prevPost,
+        comments: Array.isArray(prevPost.comments) ? [...prevPost.comments] : [],
         comments: [
           ...prevPost.comments,
           {
@@ -70,17 +67,32 @@ function Post() {
 
   const handleLikePost = async () => {
     try {
-      // Update Firestore with the new like count
-      await updateDoc(doc(db, "posts", postId), {
-        likes: likes + 1,
-      });
-
-      // Update local state with the new like count
-      setLikes(likes + 1);
+      const userId = "CurrentUserId"; // Replace with the actual user's ID
+  
+      // Check if the user has already liked the post
+      if (!post.likedBy || !post.likedBy.includes(userId)) {
+        // Update Firestore with the new like count and the user who liked the post
+        await updateDoc(doc(db, "posts", postId), {
+          likes: (post.likes || 0) + 1,
+          likedBy: arrayUnion(userId),
+        });
+  
+        // Update local state with the new like count
+        setPost((prevPost) => ({
+          ...prevPost,
+          likes: (prevPost.likes || 0) + 1,
+          likedBy: Array.isArray(prevPost.likedBy)
+            ? [...prevPost.likedBy, userId]
+            : [userId],
+        }));
+      } else {
+        console.log("User has already liked the post");
+      }
     } catch (error) {
       console.error("Error liking post:", error);
     }
   };
+  
 
   if (!post) {
     return <div>Loading...</div>;
@@ -104,14 +116,14 @@ function Post() {
 
         {/* Likes Section */}
         <div>
-          <p>Likes: {likes}</p>
+          <p>Likes: {post.likes || 0}</p>
           <button onClick={handleLikePost}>Like</button>
         </div>
 
         {/* Comments Section */}
         <div>
           <h2>Comments:</h2>
-          {post.comments && (
+          {post.comments && post.comments.length > 0 ? (
             <div>
               {post.comments.map((comment, index) => (
                 <div key={index} className="comment">
@@ -120,6 +132,8 @@ function Post() {
                 </div>
               ))}
             </div>
+          ) : (
+            <p>No comments yet.</p>
           )}
           {/* New Comment Input */}
           <div>
