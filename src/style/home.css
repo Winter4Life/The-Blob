@@ -1,0 +1,70 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    background: white;
+    padding-bottom: 30px;
+}
+
+.post {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    background: white;
+    margin-top: 30px;
+    border: 2px solid;
+    border-radius: 10px;
+}
+
+.postHeader {
+    display: flex;
+    flex-direction: column;
+    background: white;
+    margin-top: 30px;
+    padding-bottom: 30px;
+}
+
+.post-title {
+    display: flex;
+    flex-direction: column;
+    background: white;
+    border: 1px solid;
+    border-radius: 10px;
+}
+
+.text-title {
+    margin-top: 40px;
+    font-size: 50px;
+}
+
+.deletePost {
+    display: flex;
+    flex-direction: column;
+    background: white;
+    padding-bottom: 30px;
+    border: 1px solid;
+}
+
+.picturePost {
+    display: flex;
+    flex-direction: column;
+    background: white;
+    border: 1px solid;
+}
+
+.postTextContainer {
+    display: flex;
+    flex-direction: column;
+    background: white;
+    border: 1px solid;
+    margin: auto;
+    margin-top: 20px;
+}
+
+.authorName {
+    display: flex;
+    align-items: center;
+    margin: auto;
+    margin-left: 10px;
+    padding: 10px;
+}
