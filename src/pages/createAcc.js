@@ -13,6 +13,7 @@ import '../style/createAcc.css'
 
 
 const SignUp = () => {
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -39,6 +40,8 @@ const SignUp = () => {
           <input 
           type="text"
           placeholder="username"
+          value={username} // Bind value to state
+            onChange={(e) => setUsername(e.target.value)}
           ></input>
         </div>
         <div className="input">

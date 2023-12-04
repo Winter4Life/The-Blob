@@ -29,6 +29,11 @@ export default function Navbar() {
             Sign Up
           </Link>
         </li>
+        <li>
+          <Link to="/profile">
+          <img src={profileIMG} alt="Profile" className="img-profile"/>
+          </Link>
+        </li>
       </ul>
     </nav>
   );
