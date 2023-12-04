@@ -67,3 +67,11 @@ body {
 .nav li:hover {
   background-color: #86aee5; 
 }
+
+.logoutButton {
+  margin-top: 10px;
+  color: white;
+  border: none;
+  background-color: transparent;
+  font-size: 20px;
+}
