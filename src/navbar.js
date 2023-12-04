@@ -30,7 +30,8 @@ function Navbar() {
   return (
     <nav className="nav">
       <Link to="/" className="title">
-        The Blob
+      <span className="white-text">The</span>
+      <span className="red-text">Blob</span>
       </Link>
       <ul>
         <li>
@@ -50,7 +51,7 @@ function Navbar() {
         </li>
         <li>
           {!isAuth ? (
-            <Link to="/login">Login</Link>
+            <Link to="/login" className='login-nav'>Login</Link>
           ) : (
             <>
               <button onClick={handleSignOut} className='logoutButton'>Log Out</button>

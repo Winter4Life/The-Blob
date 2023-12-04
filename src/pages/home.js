@@ -54,7 +54,7 @@ function Home({ isAuth }) {
   return (
     <div className="container">
       <div className="intro">
-        <h1>Welcome to the BLOB!</h1>
+        <h1 >Welcome to the BLOB!</h1>
         <img src={blobImage} alt="Blob" />
       </div>
       <button onClick={handleDeleteAllPosts}>Delete All Posts</button>
