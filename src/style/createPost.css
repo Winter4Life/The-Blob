@@ -1,0 +1,86 @@
+*{
+    box-sizing: border-box;
+}
+  
+body {
+    margin: 0;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    background: white;
+    align-items: center;
+}
+  
+.createePostPage {
+    text-align: center;
+    background: white;
+}
+
+.cpContainer {
+    display: flex;
+    flex-direction: column;
+    margin-top: 100px;
+    align-content: center;
+    background: white;
+    padding-bottom: 20px;
+    width: 900px;
+    height: auto;
+    border: 2px solid;
+}
+
+.inputGp label {
+    margin-right: 10px;
+}
+
+.inputGp {
+    margin: 10px;
+    padding: 20px;
+}
+
+.inputGp input {
+    width: 600px;
+    height: 40px;
+    padding: 10px;
+    
+}
+
+.inputGp textarea {
+    width: 600px;
+    height: 200px;
+    padding: 10px;
+}
+
+
+.image-container {
+    display: flex;
+    flex-direction: column;
+    background: white;
+    padding: 0px 150px 30px 150px;
+}
+
+.image-container img {
+    width: 100%;
+    height: auto;
+    object-fit: contain; 
+    display: block;
+    margin: 0 auto;
+    border: 1px solid;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    color: white;
+}
+
+
+.post-button {
+    width: 200px;
+    height: auto;
+    border-radius: 4px;
+    margin-left: auto;
+}

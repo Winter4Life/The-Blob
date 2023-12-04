@@ -5,7 +5,9 @@ import { useNavigate } from "react-router-dom";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { v4 } from "uuid";
 
-function CreatePost({ isAuth }) {
+import '../style/createPost.css'
+
+function CreatePost() {
   const [title, setTitle] = useState("");
   const [postText, setPostText] = useState("");
   const [img, setImg] = useState("");
@@ -77,7 +79,7 @@ function CreatePost({ isAuth }) {
   return (
     <div className="createPostPage">
       <div className="cpContainer">
-        <h1>Create A Post</h1>
+        <h1>Create Your Post...</h1>
         <div className="inputGp">
           <label>Title:</label>
           <input
@@ -98,12 +100,14 @@ function CreatePost({ isAuth }) {
         </div>
         <div>
           <input type="file" onChange={(e) => handleUpload(e)} /><br/><br/>
-          {imageFile && <img src={URL.createObjectURL(imageFile)} alt="Uploaded" />}
+          
         </div>
-        <div>
+        <div className="image-container">
           {img && <img src={img} alt="Uploaded" />}
         </div>
-        <button onClick={createPost}>Submit Post</button>
+        <div className="button-container">
+        <button onClick={createPost} className="post-button">Submit Post</button>
+        </div>
       </div>
     </div>
   );
