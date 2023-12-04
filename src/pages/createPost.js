@@ -73,6 +73,7 @@ function CreatePost({ isAuth }) {
       navigate("/login");
     }
   }, []);
+
   return (
     <div className="createPostPage">
       <div className="cpContainer">
@@ -97,11 +98,12 @@ function CreatePost({ isAuth }) {
         </div>
         <div>
           <input type="file" onChange={(e) => handleUpload(e)} /><br/><br/>
-          <button onClick={createPost}>Submit Post</button>
-        </div>
-        <div>
           {imageFile && <img src={URL.createObjectURL(imageFile)} alt="Uploaded" />}
         </div>
+        <div>
+          {img && <img src={img} alt="Uploaded" />}
+        </div>
+        <button onClick={createPost}>Submit Post</button>
       </div>
     </div>
   );

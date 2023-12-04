@@ -29,28 +29,25 @@ function usePosts() {
 }
 
 function Home({ isAuth }) {
-  const { postLists, deletePost, getPosts } = usePosts();
-
-  const handleDeleteAllPosts = async () => {
-    try {
-      // Log a message before deletion
-      console.log("Deleting all posts...");
+    const { postLists, deletePost, getPosts } = usePosts();
   
-      // Delete all posts
-      postLists.forEach((post) => {
-        deletePost(post.id);
-      });
+    console.log("Post Lists:", postLists);
   
-      // Log a message after successful deletion
-      console.log("All posts deleted successfully!");
+    const handleDeleteAllPosts = async () => {
+      try {
+        console.log("Deleting all posts...");
   
-      // You can also trigger a function to fetch and display updated posts
-      // This can help ensure that the UI reflects the latest changes
-      getPosts();
-    } catch (error) {
-      console.error("Error deleting all posts:", error);
-    }
-  };
+        postLists.forEach((post) => {
+          deletePost(post.id);
+        });
+  
+        console.log("All posts deleted successfully!");
+  
+        getPosts();
+      } catch (error) {
+        console.error("Error deleting all posts:", error);
+      }
+    };
 
   return (
     <div className="container">
@@ -59,8 +56,8 @@ function Home({ isAuth }) {
         <img src={blobImage} alt="Blob" />
       </div>
       <button onClick={handleDeleteAllPosts}>Delete All Posts</button>
-      <div className="post">
         {postLists.map((post) => (
+            <div className="post">
           <div key={post.id}>
             <div className="postHeader">
               <div className="post-title">
@@ -82,8 +79,8 @@ function Home({ isAuth }) {
               <h3 className="authorName">@{post.author.name}</h3>
             </div>
           </div>
+          </div>
         ))}
-      </div>
     </div>
   );
 }
