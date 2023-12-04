@@ -42,7 +42,7 @@ const SignUp = () => {
       });
 
       // Navigate to the profile page
-      navigate("/profile");
+      navigate("/");
     } catch (error) {
       console.log(error);
     }
