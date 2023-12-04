@@ -1,4 +1,6 @@
-import React from "react";
+// Home.js
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { getDocs, collection, deleteDoc, doc } from "firebase/firestore";
 import { auth, db } from "../firebase";
 import blobImage from '../images/blob.jpg';
@@ -29,25 +31,25 @@ function usePosts() {
 }
 
 function Home({ isAuth }) {
-    const { postLists, deletePost, getPosts } = usePosts();
-  
-    console.log("Post Lists:", postLists);
-  
-    const handleDeleteAllPosts = async () => {
-      try {
-        console.log("Deleting all posts...");
-  
-        postLists.forEach((post) => {
-          deletePost(post.id);
-        });
-  
-        console.log("All posts deleted successfully!");
-  
-        getPosts();
-      } catch (error) {
-        console.error("Error deleting all posts:", error);
-      }
-    };
+  const { postLists, deletePost, getPosts } = usePosts();
+
+  console.log("Post Lists:", postLists);
+
+  const handleDeleteAllPosts = async () => {
+    try {
+      console.log("Deleting all posts...");
+
+      postLists.forEach((post) => {
+        deletePost(post.id);
+      });
+
+      console.log("All posts deleted successfully!");
+
+      getPosts();
+    } catch (error) {
+      console.error("Error deleting all posts:", error);
+    }
+  };
 
   return (
     <div className="container">
@@ -56,9 +58,9 @@ function Home({ isAuth }) {
         <img src={blobImage} alt="Blob" />
       </div>
       <button onClick={handleDeleteAllPosts}>Delete All Posts</button>
-        {postLists.map((post) => (
-            <div className="post">
-          <div key={post.id}>
+      {postLists.map((post) => (
+        <Link key={post.id} to={`/post/${post.id}`} className="post">
+          
             <div className="postHeader">
               <div className="post-title">
                 <h1 className="text-title">{post.title}</h1>
@@ -78,9 +80,9 @@ function Home({ isAuth }) {
               </div>
               <h3 className="authorName">@{post.author.name}</h3>
             </div>
-          </div>
-          </div>
-        ))}
+      
+        </Link>
+      ))}
     </div>
   );
 }

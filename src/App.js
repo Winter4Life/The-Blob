@@ -6,6 +6,7 @@ import CreatePost from './pages/createPost';
 import NotificationBox from './pages/notificationBox'
 import Profile from './pages/profile'
 import Logout from './pages/logout'
+import Post from './pages/post'
 import { Route, Routes } from "react-router-dom"
 import { useState } from 'react';
 //import Authentication from './Authenticate'
@@ -25,6 +26,7 @@ function App() {
         <Route path='/createPost' element={<CreatePost isAuth={isAuth}/>} />
         <Route path='/notificationBox' element={<NotificationBox isAuth={isAuth}/>} />
         <Route path='/profile' element={<Profile isAuth={isAuth}/>} />
+        <Route path='/post' element={<Post />} />
       </Routes>
     </div>
     </>

@@ -70,7 +70,7 @@ function CreatePost({ isAuth }) {
 
   useEffect(() => {
     if (!isAuth) {
-      navigate("/login");
+      navigate("/createAcc");
     }
   }, []);
 

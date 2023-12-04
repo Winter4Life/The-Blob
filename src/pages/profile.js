@@ -1,44 +1,48 @@
 import React, { useEffect, useState } from "react";
 import { onSnapshot, doc, getFirestore } from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
   const [username, setUsername] = useState("");
   const [currentUser, setCurrentUser] = useState(null);
   const db = getFirestore();
   const auth = getAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setCurrentUser(user);
+  const unsubscribe = onAuthStateChanged(auth, (user) => {
+    if (user) {
+      setCurrentUser(user);
 
-        // Retrieve user data from Firestore based on the currently logged-in user
-        const userDocRef = doc(db, "users", user.uid);
-        const unsubscribeFirestore = onSnapshot(userDocRef, (doc) => {
-          setUsername(doc.data()?.username || "");
-        });
+      const userDocRef = doc(db, "users", user.uid);
+      console.log("Before onSnapshot - User ID:", user.uid);
+      const unsubscribeFirestore = onSnapshot(userDocRef, (doc) => {
+        console.log("User document data:", doc.data());
+        setUsername(doc.data()?.username || "");
+      });
+      console.log("After onSnapshot");
 
-        return () => unsubscribeFirestore();
-      } else {
-        setCurrentUser(null);
-        setUsername("");
-      }
-    });
+      return () => unsubscribeFirestore();
+    } else {
+      setCurrentUser(null);
+      setUsername("");
+      navigate("/createAcc");
+    }
+  });
 
-    return () => unsubscribe();
-  }, [auth, db]);
+  return () => unsubscribe();
+}, [auth, db, navigate]);
+
+  // Render nothing if redirecting
+  if (!currentUser) {
+    return null;
+  }
 
   return (
     <div>
-      {currentUser ? (
-        <>
-          <h1>Welcome, {username}!</h1>
-          {/* Other profile content goes here */}
-        </>
-      ) : (
-        <p>Please sign in to view your profile.</p>
-      )}
+      <h1>Welcome, {username}!</h1>
+      {/* Other profile content goes here */}
     </div>
   );
 };

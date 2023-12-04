@@ -15,6 +15,8 @@
     margin-top: 30px;
     border: 2px solid;
     border-radius: 10px;
+    text-decoration: none;
+    color: black;
 }
 
 .postHeader {
