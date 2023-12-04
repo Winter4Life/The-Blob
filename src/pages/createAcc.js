@@ -19,6 +19,13 @@ const SignUp = () => {
   const signUp = async (e) => {
     e.preventDefault();
 
+      // Check if any of the required fields are empty
+  if (!username || !email || !password) {
+    // Show an alert if any field is empty
+    alert("Please fill in all the required fields.");
+    return;
+  }
+  
     if (password.length < 6) {
       // Password is too short, show an alert
       alert("Password must be 6 characters or longer.");
