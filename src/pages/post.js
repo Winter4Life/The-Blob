@@ -1,12 +1,31 @@
 import React, { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
-import { doc, getDoc, updateDoc, arrayUnion } from "firebase/firestore";
-import { db } from "../firebase";
+import { useParams } from "react-router-dom";
+import { doc, getDoc, updateDoc, arrayUnion, onSnapshot } from "firebase/firestore";
+import { db, auth } from "../firebase";
+import { onAuthStateChanged } from "firebase/auth";
 
 function Post() {
   const { postId } = useParams();
   const [post, setPost] = useState(null);
   const [newComment, setNewComment] = useState("");
+  const [username, setUsername] = useState("");
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const userDocRef = doc(db, "users", user.uid);
+        const unsubscribeFirestore = onSnapshot(userDocRef, (doc) => {
+          setUsername(doc.data()?.username || "");
+        });
+
+        return () => unsubscribeFirestore();
+      } else {
+        setUsername("");
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -27,57 +46,21 @@ function Post() {
     fetchPost();
   }, [postId]);
 
-  const handleAddComment = async () => {
-    try {
-      // Update Firestore with the new comment
-      await updateDoc(doc(db, "posts", postId), {
-        comments: arrayUnion({
-          text: newComment,
-          author: {
-            name: "Current User", // Replace with the actual user's name
-            id: "CurrentUserId", // Replace with the actual user's ID
-          },
-          timestamp: new Date().toISOString(),
-        }),
-      });
-
-      // Update local state with the new comment
-      setPost((prevPost) => ({
-        ...prevPost,
-        comments: Array.isArray(prevPost.comments) ? [...prevPost.comments] : [],
-        comments: [
-          ...prevPost.comments,
-          {
-            text: newComment,
-            author: {
-              name: "Current User", // Replace with the actual user's name
-              id: "CurrentUserId", // Replace with the actual user's ID
-            },
-            timestamp: new Date().toISOString(),
-          },
-        ],
-      }));
-
-      // Clear the new comment input
-      setNewComment("");
-    } catch (error) {
-      console.error("Error adding comment:", error);
-    }
-  };
-
   const handleLikePost = async () => {
+    const userId = auth.currentUser?.uid;
+
     try {
-      const userId = "CurrentUserId"; // Replace with the actual user's ID
-  
-      // Check if the user has already liked the post
+      if (!userId) {
+        console.error("User not authenticated");
+        return;
+      }
+
       if (!post.likedBy || !post.likedBy.includes(userId)) {
-        // Update Firestore with the new like count and the user who liked the post
         await updateDoc(doc(db, "posts", postId), {
           likes: (post.likes || 0) + 1,
           likedBy: arrayUnion(userId),
         });
-  
-        // Update local state with the new like count
+
         setPost((prevPost) => ({
           ...prevPost,
           likes: (prevPost.likes || 0) + 1,
@@ -92,7 +75,37 @@ function Post() {
       console.error("Error liking post:", error);
     }
   };
-  
+
+  const handleAddComment = async () => {
+    try {
+      const currentUser = auth.currentUser;
+      if (!currentUser) {
+        console.error("User not authenticated");
+        return;
+      }
+
+      const authorName = username || "Unknown";
+
+      await updateDoc(doc(db, "posts", postId), {
+        comments: arrayUnion({
+          text: newComment,
+          author: {
+            name: authorName,
+            id: currentUser.uid,
+          },
+          timestamp: new Date().toISOString(),
+        }),
+      });
+
+      const updatedPostDoc = await getDoc(doc(db, "posts", postId));
+      const updatedPostData = updatedPostDoc.data();
+
+      setPost(updatedPostData);
+      setNewComment("");
+    } catch (error) {
+      console.error("Error adding comment:", error);
+    }
+  };
 
   if (!post) {
     return <div>Loading...</div>;
@@ -105,14 +118,12 @@ function Post() {
           <h1 className="text-title">{post.title}</h1>
         </div>
       </div>
-      <div className="picturePost">
-        {post.img && <img src={post.img} alt="Post" />}
-      </div>
+      <div className="picturePost">{post.img && <img src={post.img} alt="Post" />}</div>
       <div className="postContainer">
         <div className="postTextContainer">
           <p className="postText">{post.postText}</p>
         </div>
-        <h3 className="authorName">@{post.author.name}</h3>
+        <h3 className="authorName">@{post.author?.name}</h3>
 
         {/* Likes Section */}
         <div>
@@ -128,7 +139,7 @@ function Post() {
               {post.comments.map((comment, index) => (
                 <div key={index} className="comment">
                   <p>{comment.text}</p>
-                  <p>@{comment.author.name}</p>
+                  <p>@{comment.author?.name}</p>
                 </div>
               ))}
             </div>

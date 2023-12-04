@@ -3,15 +3,18 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { getDocs, collection, deleteDoc, doc } from "firebase/firestore";
 import { auth, db } from "../firebase";
+import { useNavigate } from "react-router-dom";
 import blobImage from '../images/blob.jpg';
 import '../style/home.css';
 
 function usePosts() {
   const [postLists, setPostList] = React.useState([]);
+  const navigate = useNavigate();
 
   const deletePost = async (id) => {
     const postDoc = doc(db, "posts", id);
     await deleteDoc(postDoc);
+    navigate("/");
   };
 
   const getPosts = async () => {
@@ -77,6 +80,7 @@ function Home({ isAuth }) {
             <div className="postTextContainer">
               <p className="postText">{post.postText}</p>
             </div>
+            {/* Replace post.author.name with username */}
             <h3 className="authorName">@{post.author.name}</h3>
           </div>
         </Link>
