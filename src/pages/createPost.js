@@ -31,6 +31,9 @@ function CreatePost({ isAuth }) {
 
   const createPost = async () => {
     try {
+      const authorName = auth.currentUser.displayName || "Unknown";
+      const authorId = auth.currentUser.uid;
+  
       // Check if there is an image file to upload
       if (imageFile) {
         const imgRef = ref(storage, `Imgs/${v4()}`);
@@ -42,14 +45,14 @@ function CreatePost({ isAuth }) {
           title,
           postText,
           img: imgUrl,
-          author: { name: auth.currentUser.displayName, id: auth.currentUser.uid },
+          author: { name: authorName, id: authorId },
         });
       } else {
         // If no image file, simply add the post without the img field
         await addDoc(postsCollectionRef, {
           title,
           postText,
-          author: { name: auth.currentUser.displayName, id: auth.currentUser.uid },
+          author: { name: authorName, id: authorId },
         });
       }
   
@@ -67,6 +70,7 @@ function CreatePost({ isAuth }) {
       console.error("Error creating post:", error);
     }
   };
+  
 
   return (
     <div className="createPostPage">
