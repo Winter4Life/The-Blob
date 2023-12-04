@@ -17,16 +17,19 @@ const AuthDetails = () => {
     return () => {
       listen();
     };
-  }, []);
+  }, []); // Ensure useEffect doesn't depend on navigate
 
   const userSignOut = () => {
     signOut(auth)
       .then(() => {
+        localStorage.clear();
         console.log("sign out successful");
+    
+
       })
       .catch((error) => console.log(error));
   };
-
+  
   return (
     <div>
       {authUser ? (

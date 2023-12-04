@@ -1,21 +1,29 @@
-import { BrowserRouter as Navigate, Link } from 'react-router-dom';
+import { onAuthStateChanged, signOut } from 'firebase/auth';
+import React, { useEffect, useState } from 'react';
 import { auth } from './firebase';
-import { useState } from 'react';
-import { signOut } from 'firebase/auth';
-import { useNavigate } from 'react-router-dom';
-import createPostIMG from "./images/create.webp";
-import notificationIMG from "./images/bell.webp";
+import { Link } from 'react-router-dom';
+import createPostIMG from './images/create.webp';
+import notificationIMG from './images/bell.webp';
 import profileIMG from './images/profile.png';
+import { useNavigate } from 'react-router-dom';
 
 function Navbar() {
+  const [isAuth, setIsAuth] = useState(null); // Initialize as null
   const navigate = useNavigate();
-  const [isAuth, setIsAuth] = useState(localStorage.getItem('isAuth'));
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setIsAuth(!!user); // Set to true if user is logged in, false otherwise
+    });
+
+    return () => unsubscribe(); // Cleanup the subscription when the component unmounts
+  }, []);
 
   const handleSignOut = () => {
     signOut(auth).then(() => {
       localStorage.clear();
       setIsAuth(false);
-      return <Navigate to="/login" />;
+      // Navigate after sign-out
+      navigate('/login');
     });
   };
 
@@ -26,32 +34,32 @@ function Navbar() {
       </Link>
       <ul>
         <li>
-        {!isAuth && (
-          <Link to="/createPost">
-            <img src={createPostIMG} alt="Create Post" className="img-post"/>
-          </Link>
-        )}
+          {isAuth && (
+            <Link to="/createPost">
+              <img src={createPostIMG} alt="Create Post" className="img-post" />
+            </Link>
+          )}
         </li>
         <li>
           <Link to="/notificationBox">
-            <img src={notificationIMG} alt="Notifications" className="img-box"/>
+            <img src={notificationIMG} alt="Notifications" className="img-box" />
           </Link>
         </li>
         <li>
-            <input placeholder="search" className="searchBox"/>
+          <input placeholder="search" className="searchBox" />
         </li>
         <li>
-        {!isAuth ? (
-          <Link to="/login">Login</Link>
-        ) : (
-          <>
-            <button onClick={handleSignOut}>Log Out</button>
-          </>
-        )}
+          {!isAuth ? (
+            <Link to="/login">Login</Link>
+          ) : (
+            <>
+              <button onClick={handleSignOut}>Log Out</button>
+            </>
+          )}
         </li>
         <li>
           <Link to="/profile">
-          <img src={profileIMG} alt="Profile" className="img-profile"/>
+            <img src={profileIMG} alt="Profile" className="img-profile" />
           </Link>
         </li>
       </ul>
