@@ -36,6 +36,7 @@ function Login({ setIsAuth }) {
   };
 
   return (
+    <div>
     <form className="container" onSubmit={signIn}>
       <div className="header"> 
         <div className="text">Login</div>
@@ -66,11 +67,15 @@ function Login({ setIsAuth }) {
         <Link to="/createAcc" className="signup">Sign Up</Link>
         <button className="submit" type="submit">Login</button>
       </div>
-      <button className="GoogleLog"  onClick={signInWithGoogle}>
+      <div className="google">
+      <button className="GoogleLog" onClick={signInWithGoogle}>
         Sign in with Google
       </button>
+      </div>
       <Authentication/>
     </form>
+    </div>
+    
 )}
 
 export default Login;
