@@ -26,7 +26,7 @@ function App() {
         <Route path='/createPost' element={<CreatePost isAuth={isAuth}/>} />
         <Route path='/notificationBox' element={<NotificationBox isAuth={isAuth}/>} />
         <Route path='/profile' element={<Profile isAuth={isAuth}/>} />
-        <Route path='/post' element={<Post />} />
+        <Route path='/post/:postId' element={<Post />} />
       </Routes>
     </div>
     </>
