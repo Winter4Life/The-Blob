@@ -49,14 +49,15 @@
     flex-direction: column;
     background: white;
     margin-top: 30px;
+    border: 1px solid;
+    border-radius: 10px;
 }
 
 .post-title {
     display: flex;
     flex-direction: column;
-    background: white;
-    border: 1px solid;
-    border-radius: 10px;
+    background: transparent;
+    
 }
 
 .text-title {
@@ -68,7 +69,6 @@
     display: flex;
     flex-direction: column;
     background: white;
-    border: 1px solid;
 }
 
 .picturePost {

@@ -62,14 +62,14 @@ function Home({ isAuth }) {
       </div>
       {postLists.map((post) => (
         <Link key={post.id} to={`/post/${post.id}`} className="post">
-          <div className="postHeader">
-            <div className="post-title">
-              <h1 className="text-title">{post.title}</h1>
-            </div>
-            <div className="deletePost">
+          <div className="deletePost">
               {isAuth && post.author.id === auth.currentUser.uid && (
                 <button onClick={() => deletePost(post.id)}>&#128465;</button>
               )}
+            </div>
+          <div className="postHeader">
+            <div className="post-title">
+              <h1 className="text-title">{post.title}</h1>
             </div>
           </div>
           <div className="picturePost">
@@ -82,6 +82,7 @@ function Home({ isAuth }) {
             {/* Replace post.author.name with username */}
             <h3 className="authorName">@{post.author.name}</h3>
           </div>
+    
         </Link>
       ))}
     </div>

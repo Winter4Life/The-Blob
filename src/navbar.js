@@ -23,7 +23,7 @@ function Navbar() {
       localStorage.clear();
       setIsAuth(false);
       // Navigate after sign-out
-      navigate('/login');
+      navigate('/');
     });
   };
 
