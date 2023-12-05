@@ -1,0 +1,132 @@
+.post {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid beige;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: beige;
+}
+
+.postHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.text-title {
+    margin: 0;
+    color: #333;
+}
+
+.picturePost img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.postContainer {
+    margin-top: 20px;
+}
+
+.postTextContainer {
+    margin-bottom: 15px;
+}
+
+.postText {
+    margin: 0;
+    color: #555;
+}
+
+/* Author Name in Comment Box */
+.comment {
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid whitesmoke;
+    border-radius: 4px;
+    background-color: #ece4e4;
+    position: relative;
+}
+
+.comment .authorName {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+    color: #777;
+}
+
+.comment p {
+    margin: 0;
+    margin-top: 20px;
+}
+
+.likesContainer {
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.likesContainer {
+    display: flex;
+    align-items: center;
+}
+
+.likesContainer button {
+    padding: 12px;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5em;
+    transition: color 0.3s;
+    background-color: beige;
+    display: flex;
+
+    &.liked {
+        color: red;
+    }
+}
+
+
+
+/* Comments Section */
+.commentsContainer {
+    margin-top: 20px;
+}
+
+.commentsContainer h2 {
+    margin: 0;
+    color: #333;
+}
+
+.comment {
+    margin-top: 20px;
+}
+
+.comment p {
+    margin: 0;
+}
+
+/* New Comment Input */
+.newCommentContainer {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.newCommentContainer input {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.newCommentContainer button {
+    background-color: #27ae60;
+    color: #fff;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    margin-left: 10px;
+    cursor: pointer;
+}

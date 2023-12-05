@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { doc, getDoc, updateDoc, arrayUnion, onSnapshot } from "firebase/firestore";
 import { db, auth } from "../firebase";
 import { onAuthStateChanged } from "firebase/auth";
-
+import '../style/post.css';
 function Post() {
   const { postId } = useParams();
   const [post, setPost] = useState(null);
@@ -125,11 +125,17 @@ function Post() {
         </div>
         <h3 className="authorName">@{post.author?.name}</h3>
 
+        <p>Likes: {post.likes || 0}</p>
+
         {/* Likes Section */}
-        <div>
-          <p>Likes: {post.likes || 0}</p>
-          <button onClick={handleLikePost}>Like</button>
+        <div className="likesContainer">
+
+          <button onClick={handleLikePost} className={post.likedBy && post.likedBy.includes(auth.currentUser?.uid) ? 'liked' : ''}>
+            {post.likedBy && post.likedBy.includes(auth.currentUser?.uid) ? '❤️' : '🤍'}
+          </button>
+
         </div>
+
 
         {/* Comments Section */}
         <div>
