@@ -1,95 +1,104 @@
-.container {
-    display: flex;
-    flex-direction: column;
-    margin: auto;
-    background: white;
-    padding-bottom: 30px;
-  }
-
-  
-  .intro {
+.intro-container {
     display: flex;
     flex-direction: row; 
     align-items: center; 
     justify-content: center; 
     margin: auto;
-    background: white;
-    padding-bottom: 30px;
-  }
+}
   
-  .intro h1 {
+.intro-container h1 {
     font-family: 'Jockey One', sans-serif;
     font-weight: 900;
     font-size: 40px;
     margin-right: 100px; 
     padding-right: 100px;
-  }
+}
   
-  .intro img {
+.intro-container img {
     max-width: 100%; 
     height: auto; 
+}
+
+.decoration {
+    text-decoration: none;
+}
+
+.main-container {
+    text-align: center;
+    padding: 10px;
+    max-width: 100%;
+    margin: 0 auto;
   }
   
-
-.post {
+.home-postContainer {
     display: flex;
-    flex-direction: column;
-    width: 600px;
-    margin: auto;
-    background: white;
-    margin-top: 30px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start; /* Align items at the top of the row */
+    gap: 30px;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 0 15px; /* Adjust padding as needed */
+}
+  
+.home-post {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 300px;
+    padding: 15px 20px 0px 20px;
     border: 2px solid;
     border-radius: 10px;
     text-decoration: none;
     color: black;
+    background-color: beige;
+    align-self: flex-start; 
+    margin-top: 20px;
 }
 
-.postHeader {
+.home-postHeader {
     display: flex;
     flex-direction: column;
-    background: white;
-    margin-top: 30px;
+    background-color: white;
+    margin: 10px 0px 25px 0px;
     border: 1px solid;
     border-radius: 10px;
+    border-color: black;
 }
 
-.post-title {
+.home-postHeader h1 {
+    color: black;
+}
+
+
+.home-picturePost {
     display: flex;
     flex-direction: column;
-    background: transparent;
-    
+    border-radius: 10px;
+    border-color: black;
 }
 
-.text-title {
-    margin-top: 40px;
-    font-size: 50px;
+.home-picture {
+    border-radius: 9px;
 }
 
-.deletePost {
+.home-textContainer {
     display: flex;
     flex-direction: column;
     background: white;
-}
-
-.picturePost {
-    display: flex;
-    flex-direction: column;
-    background: white;
+    margin: 20px 0px 0px 0px;
     border: 1px solid;
+    border-radius: 10px;
+    border-color: black;
 }
 
-.postTextContainer {
-    display: flex;
-    flex-direction: column;
-    background: white;
-    border: 1px solid;
-    margin: auto;
-}
-
-.authorName {
+.home-authorName {
     display: flex;
     align-items: center;
-    margin: auto;
-    margin-left: 10px;
-    padding: 10px;
+    padding: 0;
+    margin-bottom: 0;
+}
+
+.home-authorName h3 {
+    color: black;
+    margin: 15px 0px 02px 0px;
 }

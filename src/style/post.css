@@ -6,18 +6,20 @@
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     background-color: beige;
+    display: flex;
+    flex-direction: column; 
+    max-width: 600px; 
+    margin: 0 auto;
+}
+
+.postAuthorName {
+    text-align: left;
 }
 
 .postHeader {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: center;
     margin-bottom: 15px;
-}
-
-.text-title {
-    margin: 0;
-    color: #333;
 }
 
 .picturePost img {
@@ -26,30 +28,42 @@
     border-radius: 8px;
 }
 
-.postContainer {
-    margin-top: 20px;
-}
-
 .postTextContainer {
-    margin-bottom: 15px;
+    padding: 0px 20px 0px 20px;
 }
 
-.postText {
-    margin: 0;
-    color: #555;
+.postTextContainer p {
+    margin: 16px 0px 0px 0px;
 }
 
-/* Author Name in Comment Box */
+.handles {
+    display: flex;
+    justify-content: end;
+}
+  
+.handles p {
+    margin-right: 12px; 
+}
+
+
 .comment {
     margin-top: 10px;
     padding: 10px;
-    border: 1px solid whitesmoke;
-    border-radius: 4px;
-    background-color: #ece4e4;
+
     position: relative;
+    text-align: center;
+    
+}
+.authorComment {
+    padding-bottom: 10px;
 }
 
-.comment .authorName {
+
+.commentComment {
+    padding: 0px 12px 0px 12px
+}
+
+.postAuthorName {
     position: absolute;
     top: 0;
     left: 0;
@@ -57,48 +71,6 @@
     color: #777;
 }
 
-.comment p {
-    margin: 0;
-    margin-top: 20px;
-}
-
-.likesContainer {
-    margin-top: 15px;
-    display: flex;
-    align-items: center;
-}
-
-.likesContainer {
-    display: flex;
-    align-items: center;
-}
-
-.likesContainer button {
-    padding: 12px;
-    border: none;
-    cursor: pointer;
-    font-size: 1.5em;
-    transition: color 0.3s;
-    background-color: beige;
-    display: flex;
-
-    &.liked {
-        color: red;
-    }
-}
-
-
-
-/* Comments Section */
-.commentsContainer {
-    margin-top: 20px;
-}
-
-.commentsContainer h2 {
-    margin: 0;
-    color: #333;
-}
-
 .comment {
     margin-top: 20px;
 }
@@ -107,26 +79,35 @@
     margin: 0;
 }
 
-/* New Comment Input */
-.newCommentContainer {
-    margin-top: 20px;
+.interaction {
     display: flex;
     align-items: center;
 }
-
-.newCommentContainer input {
+  
+.interaction input {
     flex: 1;
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    margin-right: 10px; 
+}
+  
+
+
+.likesContainer {
+    margin-top: 10px; /* Adjust margin as needed */
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* Align the likesContainer to the right */
 }
 
-.newCommentContainer button {
-    background-color: #27ae60;
-    color: #fff;
-    padding: 8px 12px;
+  
+.likesContainer button {
     border: none;
-    border-radius: 4px;
-    margin-left: 10px;
     cursor: pointer;
+    font-size: 1.5em;
+    transition: color 0.3s;
+    background-color: beige;
+    display: flex;
+  
+    &.liked {
+      color: red;
+    }
 }

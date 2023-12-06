@@ -17,7 +17,6 @@ function App() {
   return (
     <>
     <Navbar />
-    <div className="container">
       <Routes>
         <Route path="/" element={<Home isAuth={isAuth} />} />
         <Route path="/login" element={<Login setIsAuth={setIsAuth} />} />
@@ -28,7 +27,6 @@ function App() {
         <Route path='/profile' element={<Profile isAuth={isAuth}/>} />
         <Route path='/post/:postId' element={<Post />} />
       </Routes>
-    </div>
     </>
   )
 }

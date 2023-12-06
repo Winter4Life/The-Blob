@@ -37,8 +37,7 @@ function Login({ setIsAuth }) {
   };
 
   return (
-    <div>
-    <form className="container" onSubmit={signIn}>
+    <form className="login-container" onSubmit={signIn}>
       <div className="header"> 
         <div className="text">Login</div>
         <div className="underline"></div>
@@ -73,9 +72,7 @@ function Login({ setIsAuth }) {
         Sign in with Google
       </button>
       </div>
-    </form>
-    </div>
-    
+    </form>  
 )}
 
 export default Login;

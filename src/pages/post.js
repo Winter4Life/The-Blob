@@ -113,6 +113,58 @@ function Post() {
 
   return (
     <div className="post">
+      <div className="postAuthorName">
+        <h3>@{post.author?.name}</h3>
+      </div>
+      <div className="postHeader">
+        <h1>{post.title}</h1>
+      </div>
+      <div className="picturePost">
+        {post.img && <img src={post.img} alt="Post" />}
+      </div>
+      <div className="postTextContainer">
+        <p>{post.postText}</p>
+      </div>
+      <div className="handles">
+        <p>Comments: </p>
+        <p>Likes: {post.likes || 0}</p>
+      </div>
+      <div className="CommentsSection">
+      <h2>Comments:</h2>
+          {post.comments && post.comments.length > 0 ? (
+            <div>
+              {post.comments.map((comment, index) => (
+                <div key={index} className="comment">
+                  <p className="authorComment">@{comment.author?.name}</p>
+                  <p className="commentComment">{comment.text}</p>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p>No comments yet.</p>
+          )}
+      </div>
+      <div className="interaction">
+      <input
+              type="text"
+              placeholder="Add a comment..."
+              value={newComment}
+              onChange={(e) => setNewComment(e.target.value)}
+            />
+      </div>
+      <div className="likesContainer">
+         <button onClick={handleAddComment} >Add Comment</button>
+         <button onClick={handleLikePost} className={post.likedBy && post.likedBy.includes(auth.currentUser?.uid) ? 'liked' : ''}>
+            {post.likedBy && post.likedBy.includes(auth.currentUser?.uid) ? '❤️' : '🤍'}
+          </button>
+      </div>
+    </div>
+  )
+
+
+
+  return (
+    <div className="post">
       <div className="postHeader">
         <div className="post-title">
           <h1 className="text-title">{post.title}</h1>

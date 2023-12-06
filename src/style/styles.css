@@ -4,16 +4,11 @@
 
 body {
   margin: 0;
-}
-
-.container {
-  margin: 10px;
-  text-align: center;
-  background: linear-gradient(to bottom, white, white);
+  background-color: beige;
 }
 
 .nav {
-  background-color: #2d72d2;
+  background-color: #4C6085;
   color: white;
   display: flex;
   justify-content: space-between;
