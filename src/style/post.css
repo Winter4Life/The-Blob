@@ -92,7 +92,7 @@
 
 
 .likesContainer {
-    margin-top: 10px; /* Adjust margin as needed */
+    margin: 10px; /* Adjust margin as needed */
     display: flex;
     align-items: center;
     justify-content: flex-end; /* Align the likesContainer to the right */
@@ -100,6 +100,7 @@
 
   
 .likesContainer button {
+    margin: 0px 10px 0px 10px;
     border: none;
     cursor: pointer;
     font-size: 1.5em;

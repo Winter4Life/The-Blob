@@ -4,6 +4,7 @@ import { doc, getDoc, updateDoc, arrayUnion, onSnapshot } from "firebase/firesto
 import { db, auth } from "../firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import '../style/post.css';
+
 function Post() {
   const { postId } = useParams();
   const [post, setPost] = useState(null);
@@ -97,6 +98,11 @@ function Post() {
         }),
       });
 
+      // Update comment count
+      await updateDoc(doc(db, "posts", postId), {
+        commentCount: (post.commentCount || 0) + 1,
+      });
+
       const updatedPostDoc = await getDoc(doc(db, "posts", postId));
       const updatedPostData = updatedPostDoc.data();
 
@@ -126,7 +132,7 @@ function Post() {
         <p>{post.postText}</p>
       </div>
       <div className="handles">
-        <p>Comments: </p>
+        <p>Comments: {post.commentCount || 0}</p>
         <p>Likes: {post.likes || 0}</p>
       </div>
       <div className="CommentsSection">
@@ -160,64 +166,6 @@ function Post() {
       </div>
     </div>
   )
-
-
-
-  return (
-    <div className="post">
-      <div className="postHeader">
-        <div className="post-title">
-          <h1 className="text-title">{post.title}</h1>
-        </div>
-      </div>
-      <div className="picturePost">{post.img && <img src={post.img} alt="Post" />}</div>
-      <div className="postContainer">
-        <div className="postTextContainer">
-          <p className="postText">{post.postText}</p>
-        </div>
-        <h3 className="authorName">@{post.author?.name}</h3>
-
-        <p>Likes: {post.likes || 0}</p>
-
-        {/* Likes Section */}
-        <div className="likesContainer">
-
-          <button onClick={handleLikePost} className={post.likedBy && post.likedBy.includes(auth.currentUser?.uid) ? 'liked' : ''}>
-            {post.likedBy && post.likedBy.includes(auth.currentUser?.uid) ? '❤️' : '🤍'}
-          </button>
-
-        </div>
-
-
-        {/* Comments Section */}
-        <div>
-          <h2>Comments:</h2>
-          {post.comments && post.comments.length > 0 ? (
-            <div>
-              {post.comments.map((comment, index) => (
-                <div key={index} className="comment">
-                  <p>{comment.text}</p>
-                  <p>@{comment.author?.name}</p>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <p>No comments yet.</p>
-          )}
-          {/* New Comment Input */}
-          <div>
-            <input
-              type="text"
-              placeholder="Add a comment..."
-              value={newComment}
-              onChange={(e) => setNewComment(e.target.value)}
-            />
-            <button onClick={handleAddComment}>Add Comment</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
 }
 
 export default Post;
