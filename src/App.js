@@ -9,7 +9,6 @@ import Logout from './pages/logout'
 import Post from './pages/post'
 import { Route, Routes } from "react-router-dom"
 import { useState } from 'react';
-//import Authentication from './Authenticate'
 
 function App() {
   const [isAuth, setIsAuth] = useState(localStorage.getItem('isAuth'));

@@ -17,7 +17,7 @@ const AuthDetails = () => {
     return () => {
       listen();
     };
-  }, []); // Ensure useEffect doesn't depend on navigate
+  }, []); 
 
   const userSignOut = () => {
     signOut(auth)
