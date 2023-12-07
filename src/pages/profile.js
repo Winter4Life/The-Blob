@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { doc, getDoc,updateDoc, collection, query, where, getDocs } from "firebase/firestore";
 import { db, auth } from "../firebase";
+import { useNavigate } from "react-router-dom";
 
 function Profile() {
   const [userProfile, setUserProfile] = useState(null);
@@ -10,20 +11,25 @@ function Profile() {
   const [totalPosts, setTotalPosts] = useState(0);
   const [editingBio, setEditingBio] = useState(false);
   const [newBio, setNewBio] = useState("");
+   const navigate = useNavigate();
 
-  useEffect(() => {
+   useEffect(() => {
     const fetchUserProfile = async () => {
       const user = auth.currentUser;
-
-      if (user) {
-        // Fetch user profile from Firestore
-        const userDocRef = doc(db, "users", user.uid);
-        const userDoc = await getDoc(userDocRef);
-
-        if (userDoc.exists()) {
-          setUserProfile(userDoc.data());
-          setNewBio(userDoc.data().bio || "");
-        }
+  
+      if (!user) {
+        // Redirect to /createAcc if user is not logged in
+        navigate("/createAcc");
+        return;
+      }
+  
+      // Continue fetching user profile if the user is logged in
+      const userDocRef = doc(db, "users", user.uid);
+      const userDoc = await getDoc(userDocRef);
+  
+      if (userDoc.exists()) {
+        setUserProfile(userDoc.data());
+        setNewBio(userDoc.data().bio || "");
       }
     };
 
@@ -49,7 +55,7 @@ function Profile() {
 
     fetchUserProfile();
     fetchUserPosts();
-  }, []);
+  }, [navigate]);
 
   const handleEditBio = async () => {
     const user = auth.currentUser;
@@ -79,6 +85,8 @@ function Profile() {
   if (!userProfile) {
     return <div>Loading...</div>;
   }
+
+  
 
   return (
     <div className="profile">

@@ -1,34 +1,17 @@
-
-.create-container {
-    display: flex;
-    flex-direction: column;
+/*Do not edit .main-container*/
+.main-container {
     text-align: center;
-    background: white;
-    align-items: center;
-    width: 600px;
-    margin: auto;
-    margin-top: 100px;
-    background-color: white;
-    padding-bottom: 30px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-  
-.createePostPage {
-    text-align: center;
-    background: white;
+    padding: 10px;
+    max-width: 100%;
+    margin: 0 auto;
 }
 
 .cpContainer {
-    display: flex;
-    flex-direction: column;
     margin-top: 100px;
-    align-content: center;
     background: white;
-    padding-bottom: 20px;
-    width: 900px;
-    height: auto;
     border: 2px solid;
+    max-width: 1000px;
+    display: inline-block; 
 }
 
 .inputGp label {
@@ -40,6 +23,11 @@
     padding: 20px;
 }
 
+.inputGp-text {
+    margin: 10px;
+    padding: 20px;
+}
+
 .inputGp input {
     width: 600px;
     height: 40px;
@@ -47,12 +35,11 @@
     
 }
 
-.inputGp textarea {
+.inputGp-text textarea {
     width: 600px;
     height: 200px;
     padding: 10px;
 }
-
 
 .image-container {
     display: flex;
@@ -75,12 +62,13 @@
     flex-direction: column;
     margin: 0;
     color: white;
-}
-
-
-.post-button {
+  }
+  
+  .post-button {
     width: 200px;
     height: auto;
     border-radius: 4px;
-    margin-left: auto;
-}
+    margin: 10px; 
+    margin-left: auto; 
+  }
+  
