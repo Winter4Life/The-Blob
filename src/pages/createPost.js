@@ -15,6 +15,7 @@ function CreatePost() {
   const [imageFile, setImageFile] = useState(null);
   const [usernameLoaded, setUsernameLoaded] = useState(false);
 
+
   const postsCollectionRef = collection(db, "posts");
   let navigate = useNavigate();
 
@@ -98,7 +99,7 @@ function CreatePost() {
   };
 
   return (
-    <div className="createPostPage">
+    <div className="main-container">
       <div className="cpContainer">
         <h1>Create Your Post...</h1>
         <div className="inputGp">
@@ -110,8 +111,8 @@ function CreatePost() {
             }}
           />
         </div>
-        <div className="inputGp">
-          <label>Post:</label>
+        <div className="inputGp-text">
+          <label>Text:</label>
           <textarea
             placeholder="Post..."
             onChange={(event) => {
