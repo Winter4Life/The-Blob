@@ -26,6 +26,16 @@ const SignUp = () => {
     return;
   }
   
+ // Check if the email address ends with a specific domain
+ const allowedDomains = ["icloud.com", "me.com", "gmail.com", "yahoo.com", "outlook.com", "hotmail.com", "aol.com" ]; // Allowed domains
+ const isValidDomain = allowedDomains.some(domain => email.endsWith(domain));
+
+ if (!isValidDomain) {
+   // Show an alert if the email domain is not allowed
+   alert("Please use a valid email address: icloud, gmail, yahoo, outlook, hotmail, or aol.");
+   return;
+ }
+
     if (password.length < 6) {
       // Password is too short, show an alert
       alert("Password must be 6 characters or longer.");
