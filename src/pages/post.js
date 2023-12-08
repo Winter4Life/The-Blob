@@ -25,7 +25,7 @@ function Post() {
       }
     });
 
-    return () => unsubscribe();
+    return () => unsubscribe(); 
   }, []);
 
   useEffect(() => {

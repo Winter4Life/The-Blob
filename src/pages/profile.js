@@ -1,7 +1,7 @@
-// Profile.js
 import React, { useEffect, useState } from "react";
-import { doc, getDoc,updateDoc, collection, query, where, getDocs } from "firebase/firestore";
+import { doc, getDoc, updateDoc, collection, query, where, getDocs } from "firebase/firestore";
 import { db, auth } from "../firebase";
+import '../style/profile.css';
 
 function Profile() {
   const [userProfile, setUserProfile] = useState(null);
@@ -10,6 +10,7 @@ function Profile() {
   const [totalPosts, setTotalPosts] = useState(0);
   const [editingBio, setEditingBio] = useState(false);
   const [newBio, setNewBio] = useState("");
+  const [selectedImage, setSelectedImage] = useState(null);
 
   useEffect(() => {
     const fetchUserProfile = async () => {
@@ -53,29 +54,42 @@ function Profile() {
 
   const handleEditBio = async () => {
     const user = auth.currentUser;
-  
+
     if (!user) {
       console.error("User not authenticated");
       return;
     }
-  
+
     try {
       // Update user bio in Firestore
       const userDocRef = doc(db, "users", user.uid);
       await updateDoc(userDocRef, { bio: newBio });
-  
+
       console.log("Bio updated successfully!");
-  
+
       // Update state
       setUserProfile((prevProfile) => ({ ...prevProfile, bio: newBio }));
     } catch (error) {
       console.error("Error updating bio:", error);
     }
-  
+
     // Reset editing mode
     setEditingBio(false);
   };
-  
+
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+
+    if (file) {
+      // Use FileReader to convert the image to base64
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setSelectedImage(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   if (!userProfile) {
     return <div>Loading...</div>;
   }
@@ -100,6 +114,19 @@ function Profile() {
         )}
       </div>
 
+      {/* Image Upload Section */}
+      <div>
+        <h2>Profile Picture:</h2>
+        {selectedImage ? (
+          <img src={selectedImage} alt="Uploaded" style={{ maxWidth: "300px" }} />
+        ) : (
+          <div>
+            <input type="file" accept="image/*" onChange={handleImageUpload} />
+          </div>
+        )}
+      </div>
+
+      {/* User Posts Section */}
       <div>
         <h2>Posts ({totalPosts}):</h2>
         {userPosts.map((post) => (
